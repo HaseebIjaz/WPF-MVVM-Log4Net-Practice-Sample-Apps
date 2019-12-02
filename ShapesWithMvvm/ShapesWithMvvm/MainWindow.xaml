@@ -1,0 +1,94 @@
+﻿<Window x:Class="ShapesWithMvvm.MainWindow"
+                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:d="http://schemas.microsoft.com/xaml/behaviors"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       xmlns:local="clr-namespace:ShapesWithMvvm"
+                       xmlns:shapesNamespace="clr-namespace:System.Windows.Shapes;assembly=PresentationFramework"
+                       xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
+                       mc:Ignorable="d"
+                       Title="MainWindow"
+                       Height="450"
+                       Width="800">
+    <ItemsControl ItemsSource="{Binding Collection}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  x:Name="CanvasItemsControl">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <Canvas  IsItemsHost="True"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         Background="WhiteSmoke"
+                         ToolTip="{Binding CursorScreenCoordiante, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                         Name="DrawingCanvas">
+                </Canvas>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <!--<itemscontrol.itemcontainerstyle>
+            <style>
+                <setter property="canvas.left"
+                        value="{binding start.x}" />
+                <setter property="canvas.top"
+                        value="{binding start.y}" />
+            </style>
+        </itemscontrol.itemcontainerstyle>-->
+        <ItemsControl.Resources>
+            <!--<DataTemplate DataType="{x:Type shapesNamespace:Line}">
+                <Line Name="CanvasLine" X1="{Binding X1}"
+                      Y1="{Binding Y1}"
+                      X2="{Binding X2}"
+                      Y2="{Binding Y2}"
+                      Stroke="Black"
+                      StrokeThickness="10">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <i:InvokeCommandAction Command="{Binding Path=DataContext.MouseDownCommand,
+    RelativeSource={RelativeSource FindAncestor ,AncestorType=Window},Mode=OneWayToSource}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                </Line>
+            </DataTemplate>-->
+            <!--<DataTemplate DataType="{x:Type shapesNamespace:Rectangle}">
+                <Rectangle Width="{Binding Width}"
+                           Height="{Binding Height}"
+                           Stroke="Black"
+                           StrokeThickness="1" />
+            </DataTemplate>-->
+            <!--<DataTemplate DataType="{x:Type shapesNamespace:Ellipse}">
+                <Ellipse Width="{Binding Width}"
+                         Height="{Binding Height}"
+                         Stroke="Black"
+                         StrokeThickness="1" />
+            </DataTemplate>-->
+            <!--<DataTemplate DataType="{x:Type shapesNamespace:Polyline}">
+                <Polyline Points="{Binding}"
+                         Stroke="Black"
+                         StrokeThickness="1" />
+            </DataTemplate>-->
+            <!--<DataTemplate DataType="{x:Type shapesNamespace:Polygon}">
+                <Polygon Points="{Binding}"
+                          Stroke="Black"
+                          StrokeThickness="1" />
+            </DataTemplate>-->
+        </ItemsControl.Resources>
+        
+        <ItemsControl.InputBindings>
+            <!--<MouseBinding MouseAction="LeftClick"
+                          Command="{Binding Path=MouseDownCommand}" />
+            <MouseBinding MouseAction="LeftDoubleClick"
+                          Command="{Binding Path=MouseDownCommand}" />-->
+        </ItemsControl.InputBindings>
+
+
+    </ItemsControl>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseDown">
+            <i:InvokeCommandAction Command="{Binding MouseDownCommand}"
+                                   PassEventArgsToCommand="True"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+</Window>
